@@ -47,7 +47,55 @@ class TitanBot extends Client {
     this.db = null;
     this.rest = new REST({ version: '10' }).setToken(config.bot.token);
   }
+this.on('messageCreate', async (message) => {
+  if (message.author.bot) return;
 
+  const replies = [
+    'Oh, we’re asking me now? Bold choice. 😏',
+    'I had a comeback ready. Convenient, isn’t it? 💅',
+    'Cute message. Got anything else?',
+    'I hear you. I’m choosing to be impressed by your confidence.',
+    'Fuck yo mom'
+    'Fuck yo life bing, bong'
+    'Boooorrrrrrrrrring'
+    'Your mom so fat.................. She do not fit in the message'
+    'Stunning contribution.',
+    'Bold of you to say that out loud.',
+    'I’ll pretend that made sense.',
+    'And yet, here we are.',
+    'You really hit send on that?',
+    'Fascinating. Anyway…',
+    'I admire your confidence.',
+    'That’s certainly one opinion.',
+   'A masterpiece of unnecessary words.',
+   'I’d agree, but then we’d both be wrong.',
+'That was your best thought? Tragic.',
+  'You bring a lot to the conversation. Mostly noise.',
+  'I’d explain it, but I left my crayons at home.',
+  'You’re proof that confidence and competence are unrelated.',
+  'Somewhere, a village is missing its loudest fool.',
+  'I’ve met loading screens with more personality.',
+  'You have something on your chin… no, the third one down.',
+  'You’re not the sharpest tool in the shed. More like the mysterious damp one.',
+  'I’d call that a hot take, but it barely qualifies as a thought.',
+  'You make a strong case for staying quiet.',
+  ];
+
+  // Reply when someone mentions the bot.
+  if (this.user && message.mentions.has(this.user)) {
+    await message.reply({
+      content: replies[Math.floor(Math.random() * replies.length)],
+      allowedMentions: { repliedUser: false },
+    });
+  }
+
+  // Or use !lip to get a comeback.
+  if (message.content.trim().toLowerCase() === '!lip') {
+    await message.reply(
+      replies[Math.floor(Math.random() * replies.length)]
+    );
+  }
+});
   async start() {
     try {
       startupLog('Starting TitanBot...');
